@@ -1,0 +1,15 @@
+{
+  "name": "nodetest",
+  "version": "1.0.0",
+  "description": "This is a test of Node.js, Express.js, and various other frameworks concerned with the back end of web applications.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "nodetest"
+  },
+  "author": "Campbell Rehu",
+  "license": "ISC"
+}
