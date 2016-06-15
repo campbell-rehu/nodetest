@@ -11,5 +11,8 @@
     "url": "nodetest"
   },
   "author": "Campbell Rehu",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
