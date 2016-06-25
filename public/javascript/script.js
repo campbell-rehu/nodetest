@@ -44,17 +44,14 @@ for(i = 0; i < divs.length; i++) {
 
     child.setAttribute("src", imageSource);
 
-    $("img-responsive").fadeIn(2000);
-
     RegisterGameBoard(e.target.id+"");
 
     turn = !turn;
 
     if (CheckForWin()) {
       alert("Player " + winner + " won!");
-    }
-
-    if (CheckForNoWin()) {
+      Reset();
+    } else if (CheckForNoWin()) {
       alert("No one wins!");
       Reset();
     }
@@ -75,7 +72,27 @@ function CheckForNoWin() {
 }
 
 function Reset() {
-  //to be implemented
+  ResetImages();
+  ResetArray();
+  winner = 0;
+}
+
+function ResetImages() {
+  var i = 0;
+  for (i = 0; i < divs.length; i++) {
+    var child = divs[i].childNodes[1];
+    child.setAttribute("src", "");
+  }
+}
+
+function ResetArray() {
+  var i = 0;
+  var j = 0;
+  for (i = 0; i < game.length; i++) {
+    for (j = 0; j < game.length; j++) {
+      game[i][j] = "";
+    }
+  }
 }
 
 function RegisterGameBoard(targetName) {
