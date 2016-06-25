@@ -10,8 +10,8 @@ var i = 0;
 var turn = true;
 var winner = 0;
 
-var playerOne = { id:1 };
-var playerTwo = { id:2 };
+var playerOne = { id:"1" };
+var playerTwo = { id:"2" };
 
 var game = [3];
 
@@ -19,17 +19,17 @@ game[0] = [3];
 game[1] = [3];
 game[2] = [3];
 
-// game[0][0] = -1;
-// game[0][1] = -1;
-// game[0][2] = -1;
-//
-// game[1][0] = -1;
-// game[1][1] = -1;
-// game[1][2] = -1;
-//
-// game[2][0] = -1;
-// game[2][1] = -1;
-// game[2][2] = -1;
+game[0][0] = "";
+game[0][1] = "";
+game[0][2] = "";
+
+game[1][0] = "";
+game[1][1] = "";
+game[1][2] = "";
+
+game[2][0] = "";
+game[2][1] = "";
+game[2][2] = "";
 
 
 for(i = 0; i < divs.length; i++) {
@@ -85,9 +85,14 @@ function RegisterGameBoard(targetName) {
       return game[2][2] = (turn) ? playerOne.id : playerTwo.id;
 
     default:
-      return -1;
+      return "";
   }
 }
+
+//string
+//combine
+//convert integer
+//compare strings
 
 function CheckForWin() {
   return CheckColumns() || CheckRows() || CheckDiagonals();
@@ -96,7 +101,8 @@ function CheckForWin() {
 function CheckColumns() {
   var i = 0;
   for (i = 0; i < 3; i++) {
-    if (game[0][i] == game[1][i] == game[2][i]) {
+
+    if (game[0][i].concat(game[1][i]).concat(game[2][i]) === "111" || game[0][i].concat(game[1][i]).concat(game[2][i]) === "222") {
       winner = game[0][i];
       return true;
     }
@@ -108,7 +114,8 @@ function CheckRows() {
   var i = 0;
 
   for (i = 0; i < 3; i++) {
-    if (game[i][0] == game[i][1] == game[i][2]) {
+    console.log("game["+ i + "][0]: " + game[i][0] + " game["+ i + "][1]: " + game[i][1] + " game["+ i + "][2]: " + game[i][2]);
+    if (game[i][0].concat(game[i][1]).concat(game[i][2]) === "111" || game[i][0].concat(game[i][1]).concat(game[i][2]) === "222") {
       winner = game[i][0];
       return true;
     }
@@ -124,7 +131,8 @@ function CheckDiagonals() {
   game[2][2]
   */
 
-  if (game[0][0] == game[1][1] == game[2][2]) {
+  if ((game[0][0].concat(game[1][1]).concat(game[2][2]) === "111")
+  || ((game[0][0].concat(game[1][1]).concat(game[2][2])) === "222")) {
         winner = game[0][0];
         return true;
   }
@@ -135,7 +143,8 @@ function CheckDiagonals() {
   game[2][0]
   */
 
-  if (game[0][2] == game[1][1] == game[2][0]) {
+  if (  (game[0][2].concat(game[1][1]).concat(game[2][0]) === "111")
+    || ((game[0][2] && game[1][1] && game[2][0]) === "222")) {
     winner = game[0][2];
     return true;
   }
