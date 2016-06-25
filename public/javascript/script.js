@@ -102,7 +102,8 @@ function CheckColumns() {
   var i = 0;
   for (i = 0; i < 3; i++) {
 
-    if (game[0][i].concat(game[1][i]).concat(game[2][i]) === "111" || game[0][i].concat(game[1][i]).concat(game[2][i]) === "222") {
+    if ( game[0][i].concat(game[1][i]).concat(game[2][i]) === "111"
+      || game[0][i].concat(game[1][i]).concat(game[2][i]) === "222" ) {
       winner = game[0][i];
       return true;
     }
@@ -114,8 +115,8 @@ function CheckRows() {
   var i = 0;
 
   for (i = 0; i < 3; i++) {
-    console.log("game["+ i + "][0]: " + game[i][0] + " game["+ i + "][1]: " + game[i][1] + " game["+ i + "][2]: " + game[i][2]);
-    if (game[i][0].concat(game[i][1]).concat(game[i][2]) === "111" || game[i][0].concat(game[i][1]).concat(game[i][2]) === "222") {
+    if ( game[i][0].concat(game[i][1]).concat(game[i][2]) === "111"
+      || game[i][0].concat(game[i][1]).concat(game[i][2]) === "222" ) {
       winner = game[i][0];
       return true;
     }
@@ -126,25 +127,25 @@ function CheckRows() {
 function CheckDiagonals() {
 
   /*
-  game[0][0]
-  game[1][1]
-  game[2][2]
+  game[0][0] - topLeft
+  game[1][1] - middleMiddle
+  game[2][2] - bottomRight
   */
 
-  if ((game[0][0].concat(game[1][1]).concat(game[2][2]) === "111")
-  || ((game[0][0].concat(game[1][1]).concat(game[2][2])) === "222")) {
+  if ( game[0][0].concat(game[1][1]).concat(game[2][2]) === "111"
+    || game[0][0].concat(game[1][1]).concat(game[2][2]) === "222" ) {
         winner = game[0][0];
         return true;
   }
 
   /*
-  game[0][2]
-  game[1][1]
-  game[2][0]
+  game[0][2] - topRight
+  game[1][1] - middleMiddle
+  game[2][0] - bottomLeft
   */
 
-  if (  (game[0][2].concat(game[1][1]).concat(game[2][0]) === "111")
-    || ((game[0][2] && game[1][1] && game[2][0]) === "222")) {
+  if ( game[0][2].concat(game[1][1]).concat(game[2][0]) === "111"
+    || game[0][2].concat(game[1][1]).concat(game[2][0]) === "222" ) {
     winner = game[0][2];
     return true;
   }
