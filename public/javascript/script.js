@@ -42,9 +42,11 @@ for(i = 0; i < divs.length; i++) {
 
     var imageSource = (turn) ? "cross.png" : "circle.png";
 
-    var classList = child.setAttribute("src", imageSource);
+    child.setAttribute("src", imageSource);
 
-    console.log(RegisterGameBoard(e.target.id+""));
+    $("img-responsive").fadeIn(2000);
+
+    RegisterGameBoard(e.target.id+"");
 
     turn = !turn;
 
@@ -52,7 +54,28 @@ for(i = 0; i < divs.length; i++) {
       alert("Player " + winner + " won!");
     }
 
+    if (CheckForNoWin()) {
+      alert("No one wins!");
+      Reset();
+    }
   });
+}
+
+function CheckForNoWin() {
+  var i = 0;
+  var j = 0;
+  for (i = 0; i < game.length; i++) {
+    for (j = 0; j < game.length; j++) {
+      if (game[i][j] === "") {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+function Reset() {
+  //to be implemented
 }
 
 function RegisterGameBoard(targetName) {
