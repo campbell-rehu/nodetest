@@ -13,6 +13,14 @@ app.get("/", function(req, res) {
   res.render("index");
 });
 
+app.get("/next", function(req, res) {
+  res.send("Next");
+});
+
+app.get("/tic-tac-toe", function(req, res) {
+  res.render("tic-tac-toe");
+});
+
 app.listen(port, function() {
   console.log("Server connected...");
 });
