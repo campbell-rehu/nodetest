@@ -31,31 +31,54 @@ game[2][0] = "";
 game[2][1] = "";
 game[2][2] = "";
 
+function AddEventListeners() {
+  for(i = 0; i < divs.length; i++) {
+    divs[i].addEventListener("click", function(e) {
+      var targetId = "#" + e.target.id;
 
-for(i = 0; i < divs.length; i++) {
-  divs[i].addEventListener("click", function(e) {
-    var targetId = "#" + e.target.id;
+      var element = document.querySelector(targetId);
 
-    var element = document.querySelector(targetId);
+      var child = element.childNodes[1];
 
-    var child = element.childNodes[1];
+      var imageSource = (turn) ? "cross.png" : "circle.png";
 
-    var imageSource = (turn) ? "cross.png" : "circle.png";
+      child.setAttribute("src", imageSource);
 
-    child.setAttribute("src", imageSource);
+      RegisterGameBoard(e.target.id+"");
 
-    RegisterGameBoard(e.target.id+"");
+      turn = !turn;
 
-    turn = !turn;
-
-    if (CheckForWin()) {
-      alert("Player " + winner + " won!");
-      Reset();
-    } else if (CheckForNoWin()) {
-      alert("No one wins!");
-      Reset();
-    }
-  });
+      if (CheckForWin()) {
+        var alertDiv = document.querySelector("#alert");
+        alertDiv.className = "alert alert-success";
+        alertDiv.innerHTML = `Player ${winner} has won!
+          <a id="reset" href="#" class="alert-link">Play again?</a>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>`;
+        document.querySelector("#reset").addEventListener("click", function() {
+          Reset();
+        });
+        document.querySelector(".close").addEventListener("click", function() {
+          Reset();
+        });
+      } else if (CheckForNoWin()) {
+        alertDiv.className = "alert alert-danger";
+        alertDiv.innerHTML = `No one has won!
+          <a id="reset" href="#" class="alert-link">Play again?</a>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>`;
+        document.querySelector("#reset").addEventListener("click", function() {
+          Reset();
+        });
+        document.querySelector(".close").addEventListener("click", function() {
+          Reset();
+        });
+        Reset();
+      }
+    });
+  }
 }
 
 function CheckForNoWin() {
