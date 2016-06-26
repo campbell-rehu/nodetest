@@ -31,6 +31,8 @@ game[2][0] = "";
 game[2][1] = "";
 game[2][2] = "";
 
+AddEventListeners();
+
 function AddEventListeners() {
   for(i = 0; i < divs.length; i++) {
     divs[i].addEventListener("click", function(e) {
@@ -52,30 +54,22 @@ function AddEventListeners() {
         var alertDiv = document.querySelector("#alert");
         alertDiv.className = "alert alert-success";
         alertDiv.innerHTML = `Player ${winner} has won!
-          <a id="reset" href="#" class="alert-link">Play again?</a>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>`;
+          <a id="reset" href="#" class="alert-link">Play again?</a>`;
         document.querySelector("#reset").addEventListener("click", function() {
-          Reset();
-        });
-        document.querySelector(".close").addEventListener("click", function() {
+          alertDiv.className = "";
+          alertDiv.innerHTML = "";
           Reset();
         });
       } else if (CheckForNoWin()) {
+        var alertDiv = document.querySelector("#alert");
         alertDiv.className = "alert alert-danger";
         alertDiv.innerHTML = `No one has won!
-          <a id="reset" href="#" class="alert-link">Play again?</a>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>`;
+          <a id="reset" href="#" class="alert-link">Play again?</a>`;
         document.querySelector("#reset").addEventListener("click", function() {
+          alertDiv.className = "";
+          alertDiv.innerHTML = "";
           Reset();
         });
-        document.querySelector(".close").addEventListener("click", function() {
-          Reset();
-        });
-        Reset();
       }
     });
   }
@@ -151,11 +145,6 @@ function RegisterGameBoard(targetName) {
       return "";
   }
 }
-
-//string
-//combine
-//convert integer
-//compare strings
 
 function CheckForWin() {
   return CheckColumns() || CheckRows() || CheckDiagonals();

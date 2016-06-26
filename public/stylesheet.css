@@ -6,6 +6,16 @@ body {
   width: 100%;
 }
 
+div.thumbnail .caption {
+  padding: 0px;
+  text-align: center;
+}
+
+div.thumbnail img {
+  height = 100%;
+  padding: 5px;
+}
+
 #alert {
   margin: 10px;
   width: 66%;
