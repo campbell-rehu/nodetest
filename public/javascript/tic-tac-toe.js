@@ -33,44 +33,44 @@ game[2][2] = "";
 
 AddEventListeners();
 
+/*jshint -W083 */
 function AddEventListeners() {
   for(i = 0; i < divs.length; i++) {
-    divs[i].addEventListener("click", function(e) {
-      var targetId = "#" + e.target.id;
+    divs[i].addEventListener("click", function(e) { ClickEvent(e);});
+  }
+}
 
-      var element = document.querySelector(targetId);
+function ClickEvent(e) {
+  var targetId = "#" + e.target.id;
 
-      var child = element.childNodes[1];
+  var element = document.querySelector(targetId);
 
-      var imageSource = (turn) ? "cross.png" : "circle.png";
+  var child = element.childNodes[1];
 
-      child.setAttribute("src", imageSource);
+  var imageSource = (turn) ? "cross.png" : "circle.png";
 
-      RegisterGameBoard(e.target.id+"");
+  child.setAttribute("src", imageSource);
 
-      turn = !turn;
+  RegisterGameBoard(e.target.id+"");
 
-      if (CheckForWin()) {
-        var alertDiv = document.querySelector("#alert");
-        alertDiv.className = "alert alert-success";
-        alertDiv.innerHTML = `Player ${winner} has won!
-          <a id="reset" href="#" class="alert-link">Play again?</a>`;
-        document.querySelector("#reset").addEventListener("click", function() {
-          alertDiv.className = "";
-          alertDiv.innerHTML = "";
-          Reset();
-        });
-      } else if (CheckForNoWin()) {
-        var alertDiv = document.querySelector("#alert");
-        alertDiv.className = "alert alert-danger";
-        alertDiv.innerHTML = `No one has won!
-          <a id="reset" href="#" class="alert-link">Play again?</a>`;
-        document.querySelector("#reset").addEventListener("click", function() {
-          alertDiv.className = "";
-          alertDiv.innerHTML = "";
-          Reset();
-        });
-      }
+  turn = !turn;
+  var alertDiv = document.querySelector("#alert");
+
+  if (CheckForWin()) {
+    alertDiv.className = "alert alert-success";
+    alertDiv.innerHTML = 'Player ' + winner + ' has won! <a id="reset" href="#" class="alert-link">Play again?</a>';
+    document.querySelector("#reset").addEventListener("click", function() {
+      alertDiv.className = "";
+      alertDiv.innerHTML = "";
+      Reset();
+    });
+  } else if (CheckForNoWin()) {
+    alertDiv.className = "alert alert-danger";
+    alertDiv.innerHTML = 'No one has won! <a id="reset" href="#" class="alert-link">Play again?</a>';
+    document.querySelector("#reset").addEventListener("click", function() {
+      alertDiv.className = "";
+      alertDiv.innerHTML = "";
+      Reset();
     });
   }
 }
@@ -115,34 +115,34 @@ function ResetArray() {
 function RegisterGameBoard(targetName) {
   switch (targetName) {
     case "topLeft":
-      return game[0][0] = (turn) ? playerOne.id : playerTwo.id;
-
+      game[0][0] = (turn) ? playerOne.id : playerTwo.id;
+      break;
     case "topMiddle":
-      return game[0][1] = (turn) ? playerOne.id : playerTwo.id;
-
+      game[0][1] = (turn) ? playerOne.id : playerTwo.id;
+      break;
     case "topRight":
-      return game[0][2] = (turn) ? playerOne.id : playerTwo.id;
-
+      game[0][2] = (turn) ? playerOne.id : playerTwo.id;
+      break;
     case "middleLeft":
-      return game[1][0] = (turn) ? playerOne.id : playerTwo.id;
-
+      game[1][0] = (turn) ? playerOne.id : playerTwo.id;
+      break;
     case "middleMiddle":
-      return game[1][1] = (turn) ? playerOne.id : playerTwo.id;
-
+      game[1][1] = (turn) ? playerOne.id : playerTwo.id;
+      break;
     case "middleRight":
-      return game[1][2] = (turn) ? playerOne.id : playerTwo.id;
-
+      game[1][2] = (turn) ? playerOne.id : playerTwo.id;
+      break;
     case "bottomLeft":
-      return game[2][0] = (turn) ? playerOne.id : playerTwo.id;
-
+      game[2][0] = (turn) ? playerOne.id : playerTwo.id;
+      break;
     case "bottomMiddle":
-      return game[2][1] = (turn) ? playerOne.id : playerTwo.id;
-
+      game[2][1] = (turn) ? playerOne.id : playerTwo.id;
+      break;
     case "bottomRight":
-      return game[2][2] = (turn) ? playerOne.id : playerTwo.id;
-
+      game[2][2] = (turn) ? playerOne.id : playerTwo.id;
+      break;
     default:
-      return "";
+      break;
   }
 }
 
@@ -154,8 +154,7 @@ function CheckColumns() {
   var i = 0;
   for (i = 0; i < 3; i++) {
 
-    if ( game[0][i].concat(game[1][i]).concat(game[2][i]) === "111"
-      || game[0][i].concat(game[1][i]).concat(game[2][i]) === "222" ) {
+    if ( game[0][i].concat(game[1][i]).concat(game[2][i]) === "111" || game[0][i].concat(game[1][i]).concat(game[2][i]) === "222" ) {
       winner = game[0][i];
       return true;
     }
@@ -167,8 +166,7 @@ function CheckRows() {
   var i = 0;
 
   for (i = 0; i < 3; i++) {
-    if ( game[i][0].concat(game[i][1]).concat(game[i][2]) === "111"
-      || game[i][0].concat(game[i][1]).concat(game[i][2]) === "222" ) {
+    if ( game[i][0].concat(game[i][1]).concat(game[i][2]) === "111" || game[i][0].concat(game[i][1]).concat(game[i][2]) === "222" ) {
       winner = game[i][0];
       return true;
     }
@@ -184,8 +182,7 @@ function CheckDiagonals() {
   game[2][2] - bottomRight
   */
 
-  if ( game[0][0].concat(game[1][1]).concat(game[2][2]) === "111"
-    || game[0][0].concat(game[1][1]).concat(game[2][2]) === "222" ) {
+  if ( game[0][0].concat(game[1][1]).concat(game[2][2]) === "111" || game[0][0].concat(game[1][1]).concat(game[2][2]) === "222" ) {
         winner = game[0][0];
         return true;
   }
@@ -196,8 +193,7 @@ function CheckDiagonals() {
   game[2][0] - bottomLeft
   */
 
-  if ( game[0][2].concat(game[1][1]).concat(game[2][0]) === "111"
-    || game[0][2].concat(game[1][1]).concat(game[2][0]) === "222" ) {
+  if ( game[0][2].concat(game[1][1]).concat(game[2][0]) === "111" || game[0][2].concat(game[1][1]).concat(game[2][0]) === "222" ) {
     winner = game[0][2];
     return true;
   }
